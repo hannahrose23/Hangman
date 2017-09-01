@@ -1,5 +1,18 @@
 /*hangman javascript file*/
 
+let HangmanWordService = (function(){
+    let WordService = {};
+    WordService.getGuessWord = function(){
+        let guessWordPromise = new Promise((resolve, reject )=>{
+            let wordToGuess = document.querySelector("input[name='word']").value;
+            resolve(wordToGuess);
+        });
+        return guessWordPromise;
+    }
+
+    return WordService;
+}());
+
 let Hangman = (function(){
     let Hangman = {};
 
@@ -9,7 +22,9 @@ let Hangman = (function(){
         Hangman.board = document.querySelector(config.boardSelector);
         Hangman.startButton = Hangman.board.querySelector(".start-game-button");
         Hangman.startButton.addEventListener('click',()=>{
-            console.log("click called!");
+            HangmanWordService.getGuessWord().then((word)=>{
+                console.log(word);
+            });
         });
     }
 
