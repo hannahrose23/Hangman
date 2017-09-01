@@ -32,7 +32,27 @@ let Hangman = (function(){
         Hangman.wordToGuess = wordToGuess.split("");
         Hangman.mask = Hangman.wordToGuess.map(()=>"*");
         Hangman.guesses = 0;
-        console.log(Hangman.wordToGuess, Hangman.mask);
+        Hangman.setupBoard();
     }
+
+    Hangman.setupBoard = function(){
+        Hangman.board.innerHTML = Hangman.boardTemplate();
+    }
+    Hangman.boardTemplate = function(){
+        return `
+            <div id = "guesses">${Hangman.guesses}</div>
+            <div id = "mask">${Hangman.mask.join('')}</div>
+            <div id = "input>${Hangman.buttonTemplate()}</div>
+        `;
+    }
+
+    Hangman.buttonTemplate = function(){
+        let alphabet = "abcdefghijklmnopqrstuvwxyz".split("");
+        let alphabetButton = alphabet
+            .map(letter=>`<button class="guess-button" data-value="${letter}">${letter}</button>`)
+            
+        return alphabetButton.join('');
+    }
+
     return Hangman;
 }());
