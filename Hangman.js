@@ -37,12 +37,23 @@ let Hangman = (function(){
 
     Hangman.setupBoard = function(){
         Hangman.board.innerHTML = Hangman.boardTemplate();
+        let inputArea = Hangman.board.querySelectorAll("#input");
+        inputArea.addEventListener("click", Hangman.guessButtonCallback);
     }
+
+    Hangman.guessButtonCallback = function(event){
+        let button = event.target;
+        let guess = button.dataset.value;
+        button.disabled = true;
+        button.classList.add("guessed");
+        console.log(guess);
+    }
+
     Hangman.boardTemplate = function(){
         return `
             <div id = "guesses">${Hangman.guesses}</div>
             <div id = "mask">${Hangman.mask.join('')}</div>
-            <div id = "input>${Hangman.buttonTemplate()}</div>
+            <div id = "input">${Hangman.buttonTemplate()}</div>
         `;
     }
 
