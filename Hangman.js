@@ -2,12 +2,19 @@
 
 let HangmanWordService = (function(){
     let WordService = {};
+    WordService.url = "http://setgetgo.com/randomword/get.php";
     WordService.getGuessWord = function(){
-        let guessWordPromise = new Promise((resolve, reject )=>{
-            let wordToGuess = document.querySelector("input[name='word']").value;
-            resolve(wordToGuess);
-        });
+        let guessWordPromise = new Promise(WordService.guessWordPromiseResolver);
         return guessWordPromise;
+    }
+    WordService.guessWordPromiseResolver = function(resolve, reject){
+        let request = new XMLHttpRequest();
+        request.addEventListener("load", ()=>{
+            console.log(request.responseText);
+            resolve(request.responseText);
+        });
+        request.open("GET", WordService.url);
+        request.send();
     }
 
     return WordService;
@@ -37,7 +44,7 @@ let Hangman = (function(){
 
     Hangman.setupBoard = function(){
         Hangman.board.innerHTML = Hangman.boardTemplate();
-        let inputArea = Hangman.board.querySelectorAll("#input");
+        let inputArea = Hangman.board.querySelector("#input");
         inputArea.addEventListener("click", Hangman.guessButtonCallback);
     }
 
