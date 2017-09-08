@@ -1,1 +1,25 @@
 /*Hangman.css*/
+
+.guess-button{
+    padding: 15px;
+    padding-left: 25px;
+    padding-right: 25px;
+    background-color: #96b9ff;
+    color: white;
+    border: solid 1px black;
+}
+
+.guessed{
+    color: black;
+    text-decoration-line: line-through;
+}
+
+.wrong{
+    background-color:#f98cbc;
+    border-color: red;
+}
+
+.right{
+    background-color: #61d861;
+    border-color: green;
+}
