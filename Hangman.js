@@ -55,6 +55,11 @@ let Hangman = (function(){
         button.disabled = true;
         button.classList.add("guessed");
         let correctGuess = Hangman.checkGuess(guess);
+        Hangman.updateMask();
+    }
+
+    Hangman.updateMask = function(){
+        Hangman.board.querySelector("#mask").innerHTML = Hangman.mask.join("");
     }
 
     Hangman.checkGuess = function(guess){
