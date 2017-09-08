@@ -54,7 +54,19 @@ let Hangman = (function(){
         if(!guess){return;}
         button.disabled = true;
         button.classList.add("guessed");
-        console.log(guess);
+        let correctGuess = Hangman.checkGuess(guess);
+    }
+
+    Hangman.checkGuess = function(guess){
+        let correctGuess = false;
+        for(let i = 0; i < Hangman.wordToGuess.length; i++){
+            let character = Hangman.wordToGuess[i];
+            if(character === guess){
+                Hangman.mask[i] = character;
+                correctGuess = true;
+            }
+        }
+        return correctGuess;
     }
 
     Hangman.boardTemplate = function(){
