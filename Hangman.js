@@ -51,6 +51,7 @@ let Hangman = (function(){
     Hangman.guessButtonCallback = function(event){
         let button = event.target;
         let guess = button.dataset.value;
+        if(!guess){return;}
         button.disabled = true;
         button.classList.add("guessed");
         console.log(guess);
